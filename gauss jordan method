@@ -1,0 +1,45 @@
+ClearAll ; A = {{1, 2, 3}, {2, 6, 10}, {3, 14, 28}};
+A // MatrixForm
+x = {x1, x2, x3}; 
+x // MatrixForm 
+b = {{1}, {0}, {- 8}};
+b // MatrixForm 
+aug = ArrayFlatten [{{A, b}}];
+aug // MatrixForm
+
+
+aug[[2]] = aug[[2]] - 2 aug[[1]];
+aug[[3]] = aug[[3]] - 3 aug[[1]];
+aug // MatrixForm
+
+
+aug[[2]] = aug[[2]] * (1 / 2);
+aug // MatrixForm
+
+
+aug[[1]] = aug[[1]] - 2 aug[[2]];
+aug[[3]] = aug[[3]] - 8 aug[[2]];
+aug // MatrixForm
+
+
+aug[[3]] = aug[[3]] * (1 / 3);
+aug // MatrixForm
+
+
+aug[[1]] = aug[[1]] + aug[[3]];
+aug[[2]] = aug[[2]] - 2 aug[[3]];
+aug // MatrixForm
+
+
+IdentityMatrix [3] = Take[aug, 3, 3]; 
+IdentityMatrix [3] // MatrixForm
+
+
+c = Take[aug, 3, - 1]; 
+c // MatrixForm
+
+
+IdentityMatrix [3].x == c
+
+
+Solve[IdentityMatrix [3].x == c, x]
